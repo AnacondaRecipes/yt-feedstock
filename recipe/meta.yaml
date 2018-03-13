@@ -19,23 +19,27 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - llvm-openmp   # [osx]
+  host:
     - python
     - numpy 1.11.*
     - cython >=0.24.0
     - setuptools >=19.6
-    - pyembree  # [linux]
-    - gcc  # [linux]
+    # Removed for now.  Requires tbb, embree built from source.
+    # - pyembree  # [linux]
   run:
     - setuptools
     - python
-    - numpy >=1.11
+    - {{ pin_compatible('numpy') }}
     - h5py
     - sympy
     - matplotlib
     - ipython
-    - pyembree  # [linux]
-    # for openmp
-    - libgcc  # [linux]
+    # Removed for now.  Requires tbb, embree built from source.
+    #- pyembree  # [linux]
+    # does not have run_exports (possibly should)
+    - llvm-openmp   # [osx]
 
 test:
   requires:
