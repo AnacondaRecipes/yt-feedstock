@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   script: env EMBREE_DIR=$PREFIX python setup.py -q install --single-version-externally-managed --record=record.txt  # [not win]
   script: python setup.py -q install --single-version-externally-managed --record=record.txt  # [win]
   entry_points:
@@ -26,6 +26,7 @@ requirements:
     - numpy 1.11.*
     - cython >=0.24.0
     - setuptools >=19.6
+    - llvm-openmp   # [osx]
     # Removed for now.  Requires tbb, embree built from source.
     # - pyembree  # [linux]
   run:
