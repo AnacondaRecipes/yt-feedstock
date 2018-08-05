@@ -11,29 +11,37 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
-  script: env EMBREE_DIR=$PREFIX python setup.py -q install --single-version-externally-managed --record=record.txt  # [not win]
-  script: python setup.py -q install --single-version-externally-managed --record=record.txt  # [win]
+  number: 2
+  script: env EMBREE_DIR=$PREFIX {{ PYTHON }} setup.py -q install --single-version-externally-managed --record=record.txt  # [not win]
+  script: {{ PYTHON }} setup.py -q install --single-version-externally-managed --record=record.txt  # [win]
   entry_points:
     - yt = yt.utilities.command_line:run_main
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - llvm-openmp   # [osx]
+    - llvm-openmp  # [osx]
   host:
     - python
     - numpy 1.11.*
     - cython >=0.24.0
     - setuptools >=19.6
-    - llvm-openmp   # [osx]
+    - llvm-openmp  # [osx]
+    # Weird, Win python 2.7 gives:
+    # Warning! ***HDF5 library version mismatched error***
+    # Headers are 1.8.18, library is 1.8.20
+    # - hdf5 1.8.18  # [win and py==27]
+    # - hdf5 1.10.*  # [not win or py!=27]]
+    - hdf5
     # Removed for now.  Requires tbb, embree built from source.
-    # - pyembree  # [linux]
+    # - pyembree   # [linux]
   run:
     - setuptools
     - python
     - {{ pin_compatible('numpy') }}
     - h5py
+    # - hdf5 1.8.18  # [win and py==27]
+    # - hdf5         # [not win or py!=27]]
     - sympy
     - matplotlib
     - ipython
