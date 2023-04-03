@@ -10,6 +10,7 @@ source:
 
 build:
   number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - yt = yt.utilities.command_line:run_main
 
