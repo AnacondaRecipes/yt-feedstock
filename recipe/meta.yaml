@@ -52,7 +52,6 @@ test:
     - yt --help
   requires:
     - pip
-    - nose
 
 about:
   home: https://yt-project.org/
