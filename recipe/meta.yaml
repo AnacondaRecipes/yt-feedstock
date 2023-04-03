@@ -1,4 +1,4 @@
-{% set version = "3.6.1" %}
+{% set version = "4.1.4" %}
 
 package:
   name: yt
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/y/yt/yt-{{ version }}.tar.gz
-  sha256: be454f9d05dcbe0623328b4df43a1bfd1f0925e516be97399710452931a19bb0
+  sha256: c50a4c8ddf32088c57957d364cddb769d284b025bbe26bba85cc598078e8ad78
 
 build:
   number: 0
