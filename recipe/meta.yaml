@@ -43,6 +43,7 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - importlib-metadata >=1.4.0  # [py<38]
     - typing-extensions >=4.2.0  # [py<38]
+    - _openmp_mutex  # [linux]
 
 test:
   imports:
