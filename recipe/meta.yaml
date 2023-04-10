@@ -13,6 +13,9 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  script_env:  # [linux]
+    # https://github.com/yt-project/yt/issues/4278 Work-around for non-deterministic failures on linux.
+    - MAX_BUILD_CORES=0  # [linux]
   entry_points:
     - yt = yt.utilities.command_line:run_main
 
@@ -29,6 +32,7 @@ requirements:
     - cython 0.29.33
     - setuptools
     - wheel
+    - packaging 22.0
   run:
     - python
     - ipython >=2.0.0
@@ -36,7 +40,6 @@ requirements:
     - matplotlib-base !=3.4.2,>=3.1.0
     - more-itertools >=8.4
     - numpy >=1.14.5
-    - packaging >=20.9
     - pillow >=6.2.0
     - pyparsing >=2.0.2
     - tomli >=1.2.3  # [py<311]
