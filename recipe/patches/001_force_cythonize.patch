@@ -1,0 +1,13 @@
+Force cythonization, cause sometimes it doesn't trigger on its own
+and bad things happen on non Linux platforms.
+
+--- a/setupext.py
++++ b/setupext.py
+@@ -382,6 +382,7 @@ def create_build_ext(lib_exts, cythonize_aliases):
+                 aliases=cythonize_aliases,
+                 compiler_directives={"language_level": 2},
+                 nthreads=get_cpu_count(),
++                force=True,
+             )
+             _build_ext.finalize_options(self)
+             # Prevent numpy from thinking it is still in its setup process
