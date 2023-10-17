@@ -11,7 +11,7 @@ source:
     - patches/001_force_cythonize.patch
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   script_env:  # [linux]
     # https://github.com/yt-project/yt/issues/4278 Work-around for non-deterministic failures on linux.
@@ -29,10 +29,10 @@ requirements:
     - python
     - pip
     - numpy
-    - cython 0.29.33
+    - cython 0.29
     - setuptools
     - wheel
-    - packaging 22.0
+    - packaging 23
   run:
     - python
     - ipython >=2.0.0
