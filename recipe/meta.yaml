@@ -1,4 +1,4 @@
-{% set version = "4.1.4" %}
+{% set version = "4.4.0" %}
 
 package:
   name: yt
@@ -6,16 +6,14 @@ package:
 
 source:
   url: https://pypi.io/packages/source/y/yt/yt-{{ version }}.tar.gz
-  sha256: c50a4c8ddf32088c57957d364cddb769d284b025bbe26bba85cc598078e8ad78
+  sha256: 0e15df9cb21abe582f8128bf0705a3bc0f4805f97efd6b4f883073703941c0d5
   patches:
     - patches/001_force_cythonize.patch
 
 build:
-  number: 1
+  skip: True    # [py<310]
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  script_env:  # [linux]
-    # https://github.com/yt-project/yt/issues/4278 Work-around for non-deterministic failures on linux.
-    - MAX_BUILD_CORES=0  # [linux]
   entry_points:
     - yt = yt.utilities.command_line:run_main
 
@@ -28,11 +26,11 @@ requirements:
   host:
     - python
     - pip
-    - numpy
-    - cython 0.29
+    - numpy >=2.0.0
+    - cython >=3.0.3
     - setuptools
     - wheel
-    - packaging 23
+    - ewah-bool-utils >=1.2.0
   run:
     - python
     - ipython >=2.0.0
