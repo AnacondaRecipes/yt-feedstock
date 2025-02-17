@@ -33,31 +33,36 @@ requirements:
     - ewah-bool-utils >=1.2.0
   run:
     - python
-    - ipython >=2.0.0
-    - ipywidgets >=8.0.0
-    - matplotlib-base !=3.4.2,>=3.1.0
+    - ewah-bool-utils >=1.2.0
+    - matplotlib-base >=3.5
     - more-itertools >=8.4
-    - numpy >=1.14.5
-    - pillow >=6.2.0
-    - pyparsing >=2.0.2
+    - numpy >=1.21.3,<3
+    - numpy !=2.0.1  # [osx and arm64]
+    - packaging >=20.9
+    - pillow >=8.3.2
     - tomli >=1.2.3  # [py<311]
     - tomli-w >=0.4.0
     - tqdm >=3.4.0
-    - unyt >=2.8.0,<3.0
-    - cmyt >=0.2.2
-    - {{ pin_compatible('numpy') }}
-    - importlib-metadata >=1.4.0  # [py<38]
-    - typing-extensions >=4.2.0  # [py<38]
-    - _openmp_mutex  # [linux]
+    - unyt >=2.9.2
+    - cmyt >=1.1.2
+    - typing-extensions >=4.4.0  # [py<312]
+    #- _openmp_mutex  # [linux]
 
 test:
+  source_files:
+    - yt/tests
   imports:
     - yt
   commands:
     - pip check
     - yt --help
+    # Ignore test file that imports nose, which uses imp, which was removed in python 3.12
+    - pytest -v                                   # [py<312]
+    - pytest -v --ignore=yt/tests/test_funcs.py   # [py>=312]
   requires:
     - pip
+    - pytest
+    - nose                                        # [py<312]
 
 about:
   home: https://yt-project.org/
