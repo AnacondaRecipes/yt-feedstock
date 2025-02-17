@@ -46,7 +46,7 @@ requirements:
     - unyt >=2.9.2
     - cmyt >=1.1.2
     - typing-extensions >=4.4.0  # [py<312]
-    #- _openmp_mutex  # [linux]
+    - _openmp_mutex  # [linux]
 
 test:
   source_files:
