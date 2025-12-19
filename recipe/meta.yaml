@@ -5,14 +5,14 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/y/yt/yt-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/y/yt/yt-{{ version }}.tar.gz
   sha256: 0e15df9cb21abe582f8128bf0705a3bc0f4805f97efd6b4f883073703941c0d5
   patches:
     - patches/001_force_cythonize.patch
 
 build:
-  skip: True    # [py<310]
-  number: 0
+  skip: true  # [py<310]
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - yt = yt.utilities.command_line:run_main
@@ -21,8 +21,6 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - patch  # [unix]
-    - m2-patch  # [win]
   host:
     - python
     - pip
@@ -57,12 +55,12 @@ test:
     - pip check
     - yt --help
     # Ignore test file that imports nose, which uses imp, which was removed in python 3.12
-    - pytest -v                                   # [py<312]
-    - pytest -v --ignore=yt/tests/test_funcs.py   # [py>=312]
+    - pytest -v  # [py<312]
+    - pytest -v --ignore=yt/tests/test_funcs.py  # [py>=312]
   requires:
     - pip
     - pytest
-    - nose                                        # [py<312]
+    - nose  # [py<312]
 
 about:
   home: https://yt-project.org/
@@ -71,10 +69,10 @@ about:
   license_file: COPYING.txt
   summary: Analysis and visualization toolkit for volumetric data
   description: |
-    yt is a community-developed analysis and visualization toolkit for 
-    volumetric data. yt has been applied mostly to astrophysical simulation 
-    data, but it can be applied to many different types of data including 
-    seismology, radio telescope data, weather simulations, and nuclear 
+    yt is a community-developed analysis and visualization toolkit for
+    volumetric data. yt has been applied mostly to astrophysical simulation
+    data, but it can be applied to many different types of data including
+    seismology, radio telescope data, weather simulations, and nuclear
   dev_url: https://github.com/yt-project/yt/
   doc_url: https://yt-project.org/docs/dev/
 
