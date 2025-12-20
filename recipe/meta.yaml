@@ -1,4 +1,4 @@
-{% set version = "4.4.0" %}
+{% set version = "4.4.2" %}
 
 package:
   name: yt
@@ -6,13 +6,13 @@ package:
 
 source:
   url: https://pypi.org/packages/source/y/yt/yt-{{ version }}.tar.gz
-  sha256: 0e15df9cb21abe582f8128bf0705a3bc0f4805f97efd6b4f883073703941c0d5
+  sha256: e0883a89c2543b436c3778f555edf253c71f252f744752dc1688f8524ad03b0b
   patches:
     - patches/001_force_cythonize.patch
 
 build:
   skip: true  # [py<310]
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - yt = yt.utilities.command_line:run_main
