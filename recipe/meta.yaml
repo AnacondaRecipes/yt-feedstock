@@ -89,18 +89,18 @@ requirements:
     - ratarmount >=0.8.1,<0.9.0  # [win or osx]
 
 test:
-  #source_files:
-  #  - yt/tests
   imports:
     - yt
   commands:
     - pip check
     - yt --help
+    - rm ${SP_DIR}/yt/tests/test_funcs.py  # [unix and py>=312]
+    - del %SP_DIR%\yt\tests\test_funcs.py  # [win and py>=312]
     - pytest --pyargs yt.tests
   requires:
     - pip
     - pytest
-    - nose
+    - nose  # [py<312]
 
 about:
   home: https://yt-project.org
