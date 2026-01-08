@@ -18,13 +18,10 @@ build:
   entry_points:
     - yt = yt.utilities.command_line:run_main
   skip: true  # [py<310]
-  ignore_run_exports:
-    - numpy
-    - libcxx
 
 requirements:
   build:
-    #- {{ stdlib('c') }}
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
@@ -99,9 +96,6 @@ test:
   commands:
     - pip check
     - yt --help
-    # Ignore test file that imports nose, which uses imp, which was removed in python 3.12
-    #- pytest -v  # [py<312]
-    #- pytest -v --ignore=yt/tests/test_funcs.py  # [py>=312]
     - pytest --pyargs yt.tests
   requires:
     - pip
